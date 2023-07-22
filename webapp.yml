@@ -1,0 +1,11 @@
+- hosts: webapp
+  become: true
+  tasks:
+    - name: stop conatainer
+      shell: docker container stop mycontainer
+    - name: remove container
+      shell: docker container rm mycontainer
+    - name: remove docker image
+      shell: docker image rm -f lsagar/web_app
+    - name: create container and run application
+      shell: docker run -itd --name mycontainer -p 9000:80 lsagar/web_app
